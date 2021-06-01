@@ -15,7 +15,7 @@ router.get('/google/callback',
       res.redirect('/');
 });
 
-router.get('/facebook',  passport.authenticate('facebook'));
+router.get('/facebook',  passport.authenticate('facebook', { scope: ['profile' ]}));
 
 // @desc    Google auth callback
 // @route   GET /auth/facebook/callback

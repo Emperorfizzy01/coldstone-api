@@ -47,7 +47,8 @@ module.exports = function(passport) {
       async(accessToken, refreshToken, profile, done) => {
             const { id, email, first_name, last_name, display_name} = profile._json;
             const newUser = {
-              facebookId: profile.id,
+              email: email,
+              facebookId: id,
               firstName: first_name,
               lastName: last_name,
               displayName: display_name
@@ -55,7 +56,7 @@ module.exports = function(passport) {
           console.log(newUser);
 
            try {
-               let user = await User.findOne({ facebookId: profile.id})
+               let user = await User.findOne({ facebookId: id})
                   if(user) {
                       done(null, user)
                   } else {

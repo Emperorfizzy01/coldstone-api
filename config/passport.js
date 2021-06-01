@@ -49,8 +49,7 @@ module.exports = function(passport) {
               provider: profile.provider,
               facebookId: profile.id,
               email: (profile.emails && profile.emails[0]) ? profile.emails[0].value : '',
-              firstName: first_name,
-              lastName: last_name,
+              name: profile.displayName,
           };
           console.log(newUser);
 

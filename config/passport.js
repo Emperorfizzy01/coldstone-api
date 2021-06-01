@@ -1,7 +1,9 @@
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
-const mongoose = require('mongoose')
-const User = require('../models/User')
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const User = require('../models/User');
 
 module.exports = function(passport) {
     passport.use(new GoogleStrategy({
@@ -24,6 +26,12 @@ module.exports = function(passport) {
                       done(null, user)
                   } else {
                       user = await User.create(newUser);
+                        const payload = { user };
+                        const options = { expiresIn: '2d' };
+                        const secret = process.env.JWT_SECRET;
+                        const token = jwt.sign(payload, secret, options);
+                        console.log(token);
+                        return res.status(200).send({ token })
                   }
            } catch(err) {
               console.log(err);
@@ -61,6 +69,12 @@ module.exports = function(passport) {
                       done(null, user)
                   } else {
                       user = await User.create(newUser);
+                      const payload = { user };
+                      const options = { expiresIn: '2d' };
+                      const secret = process.env.JWT_SECRET;
+                      const token = jwt.sign(payload, secret, options);
+                      console.log(token);
+                      return res.status(200).send({ token })
                   }
            } catch(err) {
               console.log(err);

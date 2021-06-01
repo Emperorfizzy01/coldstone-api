@@ -41,13 +41,16 @@ module.exports = function(passport) {
       passport.use(new FacebookStrategy({
        clientID: process.env.FACEBOOK_APP_ID,
        clientSecret: process.env.FACEBOOK_APP_SECRET,
-        callbackURL: "https://immense-eyrie-42860.herokuapp.com/auth/facebook/callback"
+        callbackURL: "https://immense-eyrie-42860.herokuapp.com/auth/facebook/callback",
+        profileFields: ['name']
       },
       async(accessToken, refreshToken, profile, done) => {
+            const { name } = profile_json
             const newUser = {
-              provider: profile.provider,
               facebookId: profile.id,
-              name: profile.displayName,
+              displayName: profile.displayName,
+              firstName: first_name,
+              lastName: last_name
           };
           console.log(newUser);
           console.log("Auth done");

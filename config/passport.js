@@ -48,7 +48,7 @@ module.exports = function(passport) {
             const newUser = {
               provider: profile.provider,
               facebookId: profile.id,
-              email: (profile.emails && profile.emails[0]) ? profile.emails[0].value : ''
+              email: (profile.emails && profile.emails[0]) ? profile.emails[0].value : '',
               firstName: first_name,
               lastName: last_name,
           };

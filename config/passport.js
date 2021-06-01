@@ -48,13 +48,12 @@ module.exports = function(passport) {
             const newUser = {
               provider: profile.provider,
               facebookId: profile.id,
-              email: (profile.emails && profile.emails[0]) ? profile.emails[0].value : '',
               name: profile.displayName,
           };
           console.log(newUser);
 
            try {
-               let user = await User.findOne({ facebookId: id})
+               let user = await User.findOne({ facebookId: profile.id})
                   if(user) {
                       done(null, user)
                   } else {

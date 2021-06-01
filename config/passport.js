@@ -44,14 +44,14 @@ module.exports = function(passport) {
         callbackURL: "https://immense-eyrie-42860.herokuapp.com/auth/facebook/callback"
       },
       async(accessToken, refreshToken, profile, done) => {
-           console.log(profile);
             const newUser = {
               provider: profile.provider,
               facebookId: profile.id,
               name: profile.displayName,
           };
           console.log(newUser);
-
+          console.log("Auth done");
+          done(null, profile);
            try {
                let user = await User.findOne({ facebookId: profile.id})
                   if(user) {

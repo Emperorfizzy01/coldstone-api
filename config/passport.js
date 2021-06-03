@@ -50,15 +50,11 @@ module.exports = function(passport) {
        clientID: process.env.FACEBOOK_APP_ID,
        clientSecret: process.env.FACEBOOK_APP_SECRET,
         callbackURL: "https://immense-eyrie-42860.herokuapp.com/auth/facebook/callback",
-        profileFields: ['name']
       },
       async(accessToken, refreshToken, profile, done) => {
-            const { name } = profile_json
             const newUser = {
               facebookId: profile.id,
               displayName: profile.displayName,
-              firstName: first_name,
-              lastName: last_name
           };
           console.log(newUser);
           console.log("Auth done");

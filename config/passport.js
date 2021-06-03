@@ -23,6 +23,12 @@ module.exports = function(passport) {
            try {
                let user = await User.findOne({ googleId: profile.id})
                   if(user) {
+                      const payload = { user };
+                      const options = { expiresIn: '2d' };
+                      const secret = process.env.JWT_SECRET;
+                      const token = jwt.sign(payload, secret, options);
+                      console.log(token);
+                      return res.status(200).send({ token })
                       done(null, user)
                   } else {
                       user = await User.create(newUser);
@@ -62,6 +68,12 @@ module.exports = function(passport) {
            try {
                let user = await User.findOne({ facebookId: profile.id})
                   if(user) {
+                      const payload = { user };
+                      const options = { expiresIn: '2d' };
+                      const secret = process.env.JWT_SECRET;
+                      const token = jwt.sign(payload, secret, options);
+                      console.log(token);
+                      return res.status(200).send({ token })
                       done(null, user)
                   } else {
                       user = await User.create(newUser);

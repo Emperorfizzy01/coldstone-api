@@ -28,7 +28,7 @@ module.exports = function(passport) {
                       const secret = process.env.JWT_SECRET;
                       const token = jwt.sign(payload, secret, options);
                       console.log(token);
-                      done(null, token)
+                      done(null, user)
                   } else {
                       user = await User.create(newUser);
                         const payload = { user };
@@ -36,7 +36,7 @@ module.exports = function(passport) {
                         const secret = process.env.JWT_SECRET;
                         const token = jwt.sign(payload, secret, options);
                         console.log(token);
-                        done(null, token)
+                        done(null, user)
                   }
            } catch(err) {
               console.log(err);

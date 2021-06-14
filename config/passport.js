@@ -27,7 +27,7 @@ module.exports = function(passport) {
                       // const token = jwt.sign(payload, secret, options);
                       // console.log(token);
                       done(null, user)
-                  } else {
+                  } else {mm
                       user = await User.create(newUser);
                   }
            } catch(err) {

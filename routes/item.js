@@ -6,13 +6,13 @@ const Item = require('../models/Item');
 // POST to /Item
 router.post('/', async (req, res) => {
     try {
-        const { name, imageUrl, price, quantity, description } = req.body
+        const { name, imageUrl, price, quantity, description, category } = req.body
         const item = await Item.findOne({ name })
         if(item) {
            const items = await Item.findOneAndUpdate({_id: item._id}, { quantity: item.quantity + quantity }, {new: true})
            return res.status(200).send({ message: 'item updated', items})
         } else {
-            const newItem = await new Item({ name, imageUrl, price, quantity, description }).save()
+            const newItem = await new Item({ name, imageUrl, price, quantity, description, category }).save()
             return res.status(201).send({ item: newItem })
         }
     } catch (err) {

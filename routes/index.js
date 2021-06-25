@@ -33,7 +33,7 @@ router.post('/user/login', async (req, res) => {
         bcrypt.compare(password, user.password, function(err, passwordMatched) {
             if(passwordMatched){
                 // Create a token
-                const payload = { user };
+                const payload = { id: user._id, emailAddress: user.emailAddress };
                 const options = { expiresIn: '2d' };
                 const secret = process.env.JWT_SECRET;
                 const token = jwt.sign(payload, secret, options);

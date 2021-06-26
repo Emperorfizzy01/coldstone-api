@@ -21,7 +21,7 @@ router.post('/items', validateToken, async(req, res) => {
 router.get('/items', validateToken, async(req,res) => {
     try {
         if(req.decoded) {
-          const order = await Order.find({})
+          const order = await Order.find({ userId: req.decoded.user._id})
           return res.status(200).send({order})
         }
     } catch (err) {
